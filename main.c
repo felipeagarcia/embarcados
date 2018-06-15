@@ -267,7 +267,7 @@ typedef struct Perceptron{
 
 int recognize(Perceptron p, float *data, int batch_size);
 
-void train_perceptron(Perceptron *p, float **data, int num_epochs, float learn_rate);
+void train_perceptron(Perceptron *p, float data[NUM_ROWS][NUM_COLS], int num_epochs, float learn_rate);
 
 int step_function(float x);
 
@@ -322,7 +322,7 @@ int recognize(Perceptron p, float *data, int batch_size){
 	return step_function(result);
 }
 
-void train_perceptron(Perceptron *p, float **data, int num_epochs, float learn_rate){
+void train_perceptron(Perceptron *p, float data[NUM_ROWS][NUM_COLS], int num_epochs, float learn_rate){
 	int i, j, k, result = 0;
 	for(i = 0; i < p->inputs_qtd; i++){
 		(*p).weights[i] = 0; //generates a weight between 0 and 1
