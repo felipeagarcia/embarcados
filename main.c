@@ -5,7 +5,7 @@
 
 
 
-#define NUM_ROWS 192
+#define NUM_ROWS 48
 #define NUM_COLS 57
 
 float test[48][NUM_COLS] = {
@@ -278,31 +278,33 @@ int main(){
     Perceptron p;
     p.inputs_qtd = 48;
     p.weights = (float*) malloc (p.inputs_qtd * sizeof(float));
-
+    printf("init matriz 1");
     for(i = 0; i < NUM_ROWS; i++){
     	for(j = 0; j < NUM_COLS; j++){
     		if(j < 48)
     		    data[i][j] /= 255.0;
-    		printf("%f ", data[i][j]);
+    		//printf("%f ", data[i][j]);
     	}
-    	printf("\n");
+    	//printf("\n");
 
     }
-
+    printf("init matriz 2");
     for(i = 0; i < 48; i++){
     	for(j = 0; j < NUM_COLS; j++){
     		if(j < 48)
     		    test[i][j] /= 255.0;
-    		printf("%f ", test[i][j]);
+    		//printf("%f ", test[i][j]);
     	}
-    	printf("\n");
+    	//printf("\n");
 
     }
+    printf("Treinando");
     train_perceptron(&p, data, epochs, learn_rate);
     int r = 0, cont = 0;
+    printf("Validando");
     for(i = 0; i < 48; i++){
         r = recognize(p, test[i], 48);
-        printf("Result: %d, expected: %.0f\n", r, test[i][51]);
+        //printf("Result: %d, expected: %.0f\n", r, test[i][51]);
         cont = r == test[i][51]? cont + 1 : cont;
     }
     printf("accuracy = %f\n", (float)cont/(float)48);
@@ -340,7 +342,7 @@ void train_perceptron(Perceptron *p, float data[NUM_ROWS][NUM_COLS], int num_epo
 			}
 		}
 	}
-	for(i = 0; i < p->inputs_qtd; i++)
-	    printf("w[%d] = %f\n", i, p->weights[i]);
+	//for(i = 0; i < p->inputs_qtd; i++)
+	    //printf("w[%d] = %f\n", i, p->weights[i]);
 
 }
