@@ -271,11 +271,11 @@ void train_perceptron(Perceptron *p, float data[NUM_ROWS][NUM_COLS], int num_epo
 
 int step_function(float x);
 
-
 int main(){
     int epochs = 2000, i, j;
     float learn_rate = 0.01;
     Perceptron p;
+
     p.inputs_qtd = 48;
     p.weights = (float*) malloc (p.inputs_qtd * sizeof(float));
     printf("init matrix 1\n");
@@ -336,7 +336,7 @@ void train_perceptron(Perceptron *p, float data[NUM_ROWS][NUM_COLS], int num_epo
 			if(result != data[j][51]){
 			    (*p).bias  += learn_rate*(data[j][51] - result)*data[j][0];
 				for(k = 0; k < p->inputs_qtd; k++){
-					(*p).weights[k] += ALT_CI_NEW_MULT_0( learn_rate*(data[j][51] - result) ,data[j][k]);
+					(*p).weights[k] += ALT_CI_NEW_MULT_0( ALT_CI_NEW_MULT_0(learn_rate,(data[j][51] - result)) ,data[j][k]);
 				}
 
 			}
